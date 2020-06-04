@@ -4,7 +4,7 @@ const {cookies1} = require("./cookies/cookie");
 const TARGETURL = "https://www.zhipin.com/chat/im?mu=%2Fvue%2Findex%2F%23%2Fdashboard%2Fcandidate%2Frecommend%3Fjobid%3D1835b1bd7e3f7efa0XJ53Nm5EFU~%26status%3D0%26source%3D1"
 const TARGETURL2 = "https://www.zhipin.com/web/geek/resume"
 
-let id = 10;
+let id = 1;
 let isOk = false;
 
 let isFinish = false;
@@ -35,8 +35,9 @@ async function task() {
             console.log("间隔超过2秒，可以进行下一次task");
             start = now;
             id++;
-            if(id === 4 ){
-              id++;
+            if(id > 10){
+              browser.close();
+              return;
             }
             task();
           }
@@ -93,7 +94,7 @@ try{
   await frame.click("a[ka=recommend-experience-4]",{delay:300});
 
   // 选择学历  大专、本科
-  await frame.click("a[ka=recommend-degree-4]",{delay:300});
+ // await frame.click("a[ka=recommend-degree-4]",{delay:300});
   await frame.click("a[ka=recommend-degree-5]",{delay:300});
 
   await frame.click("span[ka=dialog_confirm]",{delay:300});
